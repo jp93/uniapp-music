@@ -1,0 +1,22 @@
+{
+  "name": "push-wxapp",
+  "version": "1.0.0",
+  "description": "推流小程序",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jp93/push-wxapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "flyio": "^0.6.14"
+  },
+  "bugs": {
+    "url": "https://github.com/jp93/push-wxapp/issues"
+  },
+  "homepage": "https://github.com/jp93/push-wxapp#readme"
+}
