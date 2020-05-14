@@ -4,9 +4,8 @@ const Request = new Fly()
 const newRequest = new Fly()
 
 // 配置请求根域名
-Request.config.baseURL = APIS.BASE_URL
-newRequest.config.baseURL = APIS.BASE_URL
-let NEED_LOGIN = false
+// Request.config.baseURL = APIS.BASE_URL
+// newRequest.config.baseURL = APIS.BASE_URL
 
 //公共方法设置请求头
 function configHeader (request) {
@@ -14,7 +13,6 @@ function configHeader (request) {
   if (token) {
     request.headers['accessToken'] = token
   }
-  //request.headers['Authorization'] = APIS.ACCESS_TOKEN
   return request
 }
 /*
@@ -28,19 +26,19 @@ function configHeader (request) {
 function requestConfig (request) {
   const token = uni.getStorageSync('token')
   let isAuthUserInfo = uni.getStorageSync('isAuthUserInfo')
-  if (token) {
-    request.headers['accessToken'] = token
-  }
-  else if (!token) {
-    Request.lock()
-    return new Promise((resolve, reject) => {
-      login(() => {
-        resolve(configHeader(request))
-      })
-    }).finally(() => {
-      Request.unlock()
-    })
-  }
+  // if (token) {
+  //   request.headers['accessToken'] = token
+  // }
+  // else if (!token) {
+  //   Request.lock()
+  //   return new Promise((resolve, reject) => {
+  //     login(() => {
+  //       resolve(configHeader(request))
+  //     })
+  //   }).finally(() => {
+  //     Request.unlock()
+  //   })
+  // }
   return configHeader(request)
 }
 
@@ -52,19 +50,10 @@ function responseInterceptor (response) {
 
   const d = response.data
   console.log('d',d)
-  if (d.errCode == "00000000") {
+  if (d.code == 0) {
     return d
     // 未登录时，调用login流程登录后，再次调用业务接口
-  } else if(d.errCode == "10060000"){
-    uni.setStorageSync('token', d.data)
-
-  }else if(d.errCode == '00000004'){
-    uni.removeStorageSync('token')
-    uni.hideLoading()
-    return new Promise((resolve, reject) => {
-      resolve(Request.request(response.request))
-    })
-  }else {
+  } else {
     showErro(d.errMsg)
     return Promise.reject(d)
   }

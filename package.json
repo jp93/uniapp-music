@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "flyio": "^0.6.14"
+    "flyio": "^0.6.14",
+    "jsonp": "^0.2.1"
   },
   "bugs": {
     "url": "https://github.com/jp93/push-wxapp/issues"
